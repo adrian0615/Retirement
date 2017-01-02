@@ -8,5 +8,11 @@
 
 import Foundation
 
-print("Hello, World!")
+let arguments = Array(CommandLine.arguments.dropFirst())
 
+if !arguments.isEmpty && arguments[0] == "--run-tests" {
+    runTests()
+}
+
+
+runRetirement()
