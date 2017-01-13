@@ -11,13 +11,19 @@ import Foundation
 
 import Foundation
 
+struct Dates {
+
 let now = Date()
 let calendar = Calendar(identifier: .gregorian)
-var components = calendar.dateComponents([.year], from: now)
+    
 
-func addYears(years: Int) -> String {
+
+mutating func addYears(years: Int) -> String {
+    var components = calendar.dateComponents([.year], from: now)
     let nowInNumber = Int(components.year!)
     let newDate = nowInNumber + years
     return String(newDate)
     
+}
+
 }

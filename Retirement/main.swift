@@ -14,5 +14,8 @@ if !arguments.isEmpty && arguments[0] == "--run-tests" {
     runTests()
 }
 
+var retirement = Retirement()
 
-runRetirement()
+retirement.runRetirement()
+
+

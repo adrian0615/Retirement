@@ -8,7 +8,9 @@
 
 import Foundation
 
+struct Retirement{
 
+var jSave = JSONAndSave()
 
 func getNameFromUser(prompt: String) -> String {
     print(prompt)
@@ -60,18 +62,19 @@ func retirementDifference(age: Int, retirementAge: Int) -> Int {
 let date = Date()
 let enterYourName = "What is your name?"
 
-let previouslySaved = try! String(contentsOfFile: "/Users/AdrianHome/Retirement.txt", encoding: .utf8)
+
 
 
 func runRetirement() {
     
-    
+    var dates = Dates()
     
     print("Retirement\n")
     
     let name = getNameFromUser(prompt: enterYourName)
     
     print("Hello, \(name)!\n")
+    
     let age = getAgefromUser()
     
     let retirementAge = getRetirementAgefromUser()
@@ -82,9 +85,10 @@ func runRetirement() {
     
     print("You have \(displayYearsToRetirement) years until you will retire.\n")
     
-    let retirementYear = addYears(years: yearsToRetirement)
+    let retirementYear = dates.addYears(years: yearsToRetirement)
     
-    print("It is \(components.year!), and you will retire in \(retirementYear).\n")
+    
+    print("It is \(dates.calendar.dateComponents([.year], from: dates.now)), and you will retire in \(retirementYear).\n")
     
     let retirementData: [String : Any] = [
         "name" : name,
@@ -92,25 +96,10 @@ func runRetirement() {
         "retirement age" : retirementAge,
         "years to retirement" : yearsToRetirement]
     
-    let jsonRepresentation = try! JSONSerialization.data(withJSONObject: retirementData, options: [])
     
-    
-    let returned = String(bytes: jsonRepresentation, encoding: .utf8)!
-    
-    let jsonData = returned.data(using: .utf8)!
-    
-    let jsonObject = try! JSONSerialization.jsonObject(with: jsonData, options:[]) as! [String:Any]
-    
-    let updatedRetirementData = "\(previouslySaved)\n\(jsonObject)\n"
-    
-    _ = try? updatedRetirementData.write(toFile: "/Users/AdrianHome/Retirement.txt", atomically: true, encoding: .utf8)
-    
-    let saved = try! String(contentsOfFile: "/Users/AdrianHome/Retirement.txt", encoding: .utf8)
-    
-    print(saved)
-    
+    print(jSave.jsonSave(jsonObject: retirementData))
     
 }
 
-
+}
 
